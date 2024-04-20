@@ -22,7 +22,7 @@ public class PhNumber {
 
     public var formattedNumber: String? {
         do {
-            let phoneNumber = try phoneNumberKit.parse(rawString)
+            let phoneNumber = try phoneNumberKit.parse(countryCode.phoneCode + rawString)
             return phoneNumberKit.format(phoneNumber, toType: .e164)
         } catch {
             return nil
