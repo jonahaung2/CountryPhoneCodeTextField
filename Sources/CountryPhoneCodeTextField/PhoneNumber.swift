@@ -35,6 +35,10 @@ public class PhoneNumber {
         do {
             let phoneNumber = try phoneNumberKit.parse(number)
             number = phoneNumber.nationalNumber.description
+            if let regionID = phoneNumber.regionID {
+                countryCode = .init(code: regionID, phoneCode: phoneNumber.countryCode.description)
+            }
+            
         } catch {
             print("Generic parser error")
         }
