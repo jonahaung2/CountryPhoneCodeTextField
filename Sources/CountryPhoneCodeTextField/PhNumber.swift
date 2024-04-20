@@ -17,11 +17,16 @@ public class PhNumber {
     private let phoneNumberKit = PhoneNumberKit()
 
     public var isValid: Bool {
-        phoneNumberKit.isValidPhoneNumber(formattedNumber)
+        phoneNumberKit.isValidPhoneNumber(rawString)
     }
 
-    public var formattedNumber: String {
-        countryCode.phoneCode + rawString
+    public var formattedNumber: String? {
+        do {
+            let phoneNumber = try phoneNumberKit.parse(rawString)
+            return phoneNumberKit.format(phoneNumber, toType: .e164)
+        } catch {
+            return nil
+        }
     }
 
     public static let locale = PhNumber(countryCode: .current)
