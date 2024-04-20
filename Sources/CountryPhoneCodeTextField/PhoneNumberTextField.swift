@@ -24,7 +24,7 @@ public struct PhoneNumberTextField: View {
                 }
             Divider()
             
-            TextField("\(phoneNumber.countryCode.wrappedValue.country) mobile no", text: phoneNumber.number)
+            TextField("\(phoneNumber.countryCode.wrappedValue.country) mobile no", text: phoneNumber.rawString)
                 .textContentType(.telephoneNumber)
                 .keyboardType(.phonePad)
                 .focused($isTextFieldFocused, equals: true)
