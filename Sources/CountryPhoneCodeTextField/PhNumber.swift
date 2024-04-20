@@ -34,9 +34,7 @@ public class PhNumber {
     }
     
     public func validate() {
-        guard number == nil else {
-            return
-        }
+        
         do {
             number = try phoneNumberKit.parse(rawString)
             if let code = number?.countryCode {
