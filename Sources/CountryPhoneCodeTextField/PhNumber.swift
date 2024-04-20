@@ -17,7 +17,7 @@ public class PhNumber {
     private let phoneNumberKit = PhoneNumberKit()
 
     public var isValid: Bool {
-        phoneNumberKit.isValidPhoneNumber(countryCode.phoneCode + rawString)
+        formattedNumber != nil
     }
 
     public var formattedNumber: String? {
