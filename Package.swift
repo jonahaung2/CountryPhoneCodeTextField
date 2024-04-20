@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "CountryPhoneCodeTextField",
     platforms: [
-        .iOS("16.0"), .macOS("14.0"), .tvOS(.v12)
+        .iOS("17.0"), .macOS("14.0"), .tvOS(.v12)
     ],
     products: [
         .library(

@@ -7,11 +7,12 @@
 
 import Foundation
 
-public class PhoneNumber: ObservableObject {
+@Observable
+public class PhoneNumber {
 
     public var id: String { countryCode.country + number }
-    @Published public var countryCode: CountryCode
-    @Published public var number: String
+    public var countryCode: CountryCode
+    public var number: String
 
     public var isValid: Bool {
         number.allSatisfy{ $0.isNumber } && !number.isEmpty
