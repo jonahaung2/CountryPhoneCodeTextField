@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PhoneNumberKit
 
 @Observable
 public class PhoneNumber {
@@ -13,6 +14,7 @@ public class PhoneNumber {
     public var id: String { countryCode.country + number }
     public var countryCode: CountryCode
     public var number: String
+    private let phoneNumberKit = PhoneNumberKit()
 
     public var isValid: Bool {
         number.allSatisfy{ $0.isNumber } && !number.isEmpty
@@ -27,5 +29,14 @@ public class PhoneNumber {
     public init(countryCode: CountryCode) {
         self.countryCode = countryCode
         self.number = String()
+    }
+    
+    public func validate() {
+        do {
+            let phoneNumber = try phoneNumberKit.parse(number)
+            number = phoneNumber.numberString
+        } catch {
+            print("Generic parser error")
+        }
     }
 }
