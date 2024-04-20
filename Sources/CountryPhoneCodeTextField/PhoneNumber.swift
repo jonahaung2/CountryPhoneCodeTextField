@@ -10,7 +10,7 @@ import Foundation
 public class PhoneNumber: ObservableObject {
 
     public var id: String { countryCode.country + number }
-    public var countryCode: CountryCode
+    @Published public var countryCode: CountryCode
     @Published public var number: String
 
     public var isValid: Bool {
