@@ -26,8 +26,6 @@ public struct PhoneNumberTextField: View {
             TextField("\(phoneNumber.countryCode.wrappedValue.name)", text: phoneNumber.rawString)
                 .textContentType(.telephoneNumber)
                 .keyboardType(.phonePad)
-            
-            Divider()
             Text(phoneNumber.wrappedValue.countryCode.flag)
                 ._presentSheet {
                     CountryCodePickerView(countryCode: phoneNumber.countryCode)
