@@ -18,10 +18,14 @@ public struct PhoneNumberTextField: View {
     }
     public var body: some View {
         HStack {
-            Text(phoneNumber.wrappedValue.countryCode.flag)
-                ._presentSheet {
-                    CountryCodePickerView(countryCode: phoneNumber.countryCode)
-                }
+            HStack {
+                Text(phoneNumber.wrappedValue.countryCode.flag)
+                Divider()
+                Text(phoneNumber.wrappedValue.countryCode.phoneCode)
+            }
+            ._presentSheet {
+                CountryCodePickerView(countryCode: phoneNumber.countryCode)
+            }
             Divider()
             
             TextField("\(phoneNumber.countryCode.wrappedValue.country) mobile no", text: phoneNumber.rawString)
