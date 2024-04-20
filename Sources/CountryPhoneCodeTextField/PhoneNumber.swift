@@ -17,11 +17,18 @@ public class PhoneNumber {
     private let phoneNumberKit = PhoneNumberKit()
 
     public var isValid: Bool {
-        number.allSatisfy{ $0.isNumber } && !number.isEmpty
+        phoneNumberKit.isValidPhoneNumber(number)
     }
 
-    public var formattedNumber: String {
-        countryCode.phoneCode + number
+    public var formattedNumber: String? {
+        do {
+            let phoneNumber = try phoneNumberKit.parse(number)
+            return phoneNumberKit.format(phoneNumber, toType: .e164)
+            
+        } catch {
+            print(error)
+            return nil
+        }
     }
 
     public static let locale = PhoneNumber(countryCode: .current)
@@ -32,15 +39,18 @@ public class PhoneNumber {
     }
     
     public func validate() {
+        guard isValid else {
+            countryCode = .current
+            return
+        }
         do {
             let phoneNumber = try phoneNumberKit.parse(number)
             number = phoneNumber.nationalNumber.description
             if let regionID = phoneNumber.regionID {
                 countryCode = .init(code: regionID, phoneCode: phoneNumber.countryCode.description)
             }
-            
         } catch {
-            print("Generic parser error")
+            countryCode = .current
         }
     }
 }
