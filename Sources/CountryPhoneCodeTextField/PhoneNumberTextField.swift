@@ -13,7 +13,7 @@ public struct PhoneNumberTextField: View {
     private var phoneNumber: Binding<PhoneNumber>
     @FocusState private var isTextFieldFocused: Bool?
     
-    init(phoneNumber: Binding<PhoneNumber>, isTextFieldFocused: Bool? = nil) {
+    public init(phoneNumber: Binding<PhoneNumber>) {
         self.phoneNumber = phoneNumber
     }
     public var body: some View {
