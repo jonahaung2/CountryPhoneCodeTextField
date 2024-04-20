@@ -18,7 +18,7 @@ public struct PhoneNumberTextField: View {
     }
     public var body: some View {
         HStack {
-            Text(phoneNumber.countryCode.wrappedValue.flag)
+            Text(phoneNumber.wrappedValue.countryCode.flag)
                 ._presentSheet {
                     CountryCodePickerView(countryCode: phoneNumber.countryCode)
                 }
