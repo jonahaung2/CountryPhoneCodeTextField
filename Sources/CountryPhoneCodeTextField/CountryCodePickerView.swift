@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct CountryCodePickerView: View {
 
-    @Binding public var countryCode: CountryCode
+    public var countryCode: Binding<CountryCode>
 
     @State private var searchText = ""
     private var displayedCodes: [CountryCode] {
@@ -26,7 +26,7 @@ public struct CountryCodePickerView: View {
             List {
                 ForEach(displayedCodes) { code in
                     Button {
-                        countryCode = code
+                        countryCode.wrappedValue = code
                         dismiss()
                     } label: {
                         HStack {
