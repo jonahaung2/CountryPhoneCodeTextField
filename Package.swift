@@ -14,13 +14,15 @@ let package = Package(
             targets: ["CountryPhoneCodeTextField"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/jonahaung2/XUI", from: .init(stringLiteral: "1.0.0"))
+        .package(url: "https://github.com/jonahaung2/XUI", from: .init(stringLiteral: "1.0.0")),
+        .package(url: "https://github.com/marmelroy/PhoneNumberKit", from: "3.7.0")
     ],
     targets: [
         .target(
             name: "CountryPhoneCodeTextField",
             dependencies: [
-                "XUI"
+                "XUI",
+                "PhoneNumberKit"
             ]),
         .testTarget(
             name: "CountryPhoneCodeTextFieldTests",
