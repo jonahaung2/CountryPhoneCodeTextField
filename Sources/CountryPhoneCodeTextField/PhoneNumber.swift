@@ -34,7 +34,7 @@ public class PhoneNumber {
     public func validate() {
         do {
             let phoneNumber = try phoneNumberKit.parse(number)
-            number = phoneNumber.numberString
+            number = phoneNumber.nationalNumber.description
         } catch {
             print("Generic parser error")
         }
