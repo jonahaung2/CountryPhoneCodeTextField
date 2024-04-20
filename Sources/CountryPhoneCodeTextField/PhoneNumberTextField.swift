@@ -10,18 +10,21 @@ import XUI
 
 public struct PhoneNumberTextField: View {
     
-    @Binding public var phoneNumber: PhoneNumber
+    private var phoneNumber: Binding<PhoneNumber>
     @FocusState private var isTextFieldFocused: Bool?
     
+    init(phoneNumber: Binding<PhoneNumber>, isTextFieldFocused: Bool? = nil) {
+        self.phoneNumber = phoneNumber
+    }
     public var body: some View {
         HStack {
-            Text(phoneNumber.countryCode.flag)
+            Text(phoneNumber.countryCode.wrappedValue.flag)
                 ._tapToPush {
-                    CountryCodePickerView(countryCode: $phoneNumber.countryCode)
+                    CountryCodePickerView(countryCode: phoneNumber.countryCode)
                 }
             Divider()
             
-            TextField("\(phoneNumber.countryCode.country) mobile no", text: $phoneNumber.number)
+            TextField("\(phoneNumber.countryCode.wrappedValue.country) mobile no", text: phoneNumber.number)
                 .textContentType(.telephoneNumber)
                 .keyboardType(.phonePad)
                 .focused($isTextFieldFocused, equals: true)
