@@ -11,7 +11,7 @@ public class PhoneNumber: ObservableObject {
 
     public var id: String { countryCode.country + number }
     public var countryCode: CountryCode
-    public var number: String
+    @Published public var number: String
 
     public var isValid: Bool {
         number.allSatisfy{ $0.isNumber } && !number.isEmpty
