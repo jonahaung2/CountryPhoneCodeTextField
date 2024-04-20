@@ -17,7 +17,7 @@ public struct CountryCode: Identifiable {
 
     public init(code: String) {
         self.country = code
-        self.phoneCode = CountryCode.countryCodesRaw[code] ?? "+65"
+        self.phoneCode = "+"+(CountryCode.countryCodesRaw[code] ?? "65")
         self.name = Locale.current.localizedString(forRegionCode: code) ?? "NA"
         self.flag = code.flag()
     }
