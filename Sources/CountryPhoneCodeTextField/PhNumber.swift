@@ -14,16 +14,19 @@ public class PhNumber {
     public var id: String { countryCode.country + rawString }
     public var countryCode: CountryCode
     public var rawString: String
-    public var number: PhoneNumber?
     private let phoneNumberKit = PhoneNumberKit()
 
     public var isValid: Bool {
-        number != nil
+        phoneNumberKit.isValidPhoneNumber(rawString)
     }
 
     public var formattedNumber: String? {
-        guard let number else { return nil }
-        return phoneNumberKit.format(number, toType: .e164)
+        do {
+            let phoneNumber = try phoneNumberKit.parse(rawString)
+            return phoneNumberKit.format(phoneNumber, toType: .e164)
+        } catch {
+            return nil
+        }
     }
 
     public static let locale = PhNumber(countryCode: .current)
@@ -34,14 +37,17 @@ public class PhNumber {
     }
     
     public func validate() {
-        
+        guard isValid else {
+            return
+        }
         do {
-            number = try phoneNumberKit.parse(rawString)
-            if let regionID = number?.regionID {
+            let phoneNumber = try phoneNumberKit.parse(rawString)
+            rawString = phoneNumber.nationalNumber.description
+            if let regionID = phoneNumber.regionID {
                 countryCode = .init(code: regionID)
             }
         } catch {
-            number = nil
+            print(error)
         }
     }
 }
