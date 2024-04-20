@@ -37,8 +37,8 @@ public class PhNumber {
         
         do {
             number = try phoneNumberKit.parse(rawString)
-            if let code = number?.countryCode {
-                countryCode = .init(code: code.description)
+            if let regionID = number?.regionID {
+                countryCode = .init(code: regionID)
             }
         } catch {
             number = nil
