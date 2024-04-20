@@ -19,7 +19,7 @@ public struct PhoneNumberTextField: View {
     public var body: some View {
         HStack {
             Text(phoneNumber.countryCode.wrappedValue.flag)
-                ._tapToPush {
+                ._presentSheet {
                     CountryCodePickerView(countryCode: phoneNumber.countryCode)
                 }
             Divider()
