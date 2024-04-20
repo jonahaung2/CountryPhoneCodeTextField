@@ -9,28 +9,24 @@ import Foundation
 import PhoneNumberKit
 
 @Observable
-public class PhoneNumber {
+public class PhNumber {
 
     public var id: String { countryCode.country + rawString }
     public var countryCode: CountryCode
     public var rawString: String
+    public var number: PhoneNumber?
     private let phoneNumberKit = PhoneNumberKit()
 
     public var isValid: Bool {
-        phoneNumberKit.isValidPhoneNumber(rawString)
+        number != nil
     }
 
     public var formattedNumber: String? {
-        do {
-            let phoneNumber = try phoneNumberKit.parse(rawString)
-            return phoneNumberKit.format(phoneNumber, toType: .e164)
-        } catch {
-            print(error)
-            return nil
-        }
+        guard let number else { return nil }
+        return phoneNumberKit.format(number, toType: .e164)
     }
 
-    public static let locale = PhoneNumber(countryCode: .current)
+    public static let locale = PhNumber(countryCode: .current)
     
     public init(countryCode: CountryCode) {
         self.countryCode = countryCode
@@ -38,17 +34,16 @@ public class PhoneNumber {
     }
     
     public func validate() {
-        guard isValid else {
+        guard number == nil else {
             return
         }
         do {
-            let phoneNumber = try phoneNumberKit.parse(rawString)
-            rawString = phoneNumber.nationalNumber.description
-            if let regionID = phoneNumber.regionID {
-                countryCode = .init(code: regionID)
+            number = try phoneNumberKit.parse(rawString)
+            if let code = number?.countryCode {
+                countryCode = .init(code: code.description)
             }
         } catch {
-            print(error)
+            number = nil
         }
     }
 }

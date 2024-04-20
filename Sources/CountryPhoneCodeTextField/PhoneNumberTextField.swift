@@ -10,10 +10,10 @@ import XUI
 
 public struct PhoneNumberTextField: View {
     
-    private var phoneNumber: Binding<PhoneNumber>
+    private var phoneNumber: Binding<PhNumber>
     @FocusState private var isTextFieldFocused: Bool?
     
-    public init(phoneNumber: Binding<PhoneNumber>) {
+    public init(phoneNumber: Binding<PhNumber>) {
         self.phoneNumber = phoneNumber
     }
     public var body: some View {
