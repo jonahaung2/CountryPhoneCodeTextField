@@ -29,7 +29,6 @@ public struct PhoneNumberTextField: View {
             Text(phoneNumber.wrappedValue.countryCode.flag)
                 ._presentSheet {
                     CountryCodePickerView(countryCode: phoneNumber.countryCode)
-                        .font(.body)
                 }
         }
         .padding(3)

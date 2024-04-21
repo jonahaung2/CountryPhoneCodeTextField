@@ -43,6 +43,7 @@ public struct CountryCodePickerView: View {
                     .buttonStyle(.borderless)
                 }
             }
+            .font(.body)
             .navigationTitle("Country Picker")
             .searchable(text: $searchText, prompt: "Search country by name")
         }
