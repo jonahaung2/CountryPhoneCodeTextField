@@ -23,12 +23,13 @@ public struct PhoneNumberTextField: View {
                 }
             Divider()
             
-            TextField("\(phoneNumber.countryCode.wrappedValue.name)", text: phoneNumber.rawString)
+            TextField(phoneNumber.countryCode.wrappedValue.name, text: phoneNumber.rawString)
                 .textContentType(.telephoneNumber)
                 .keyboardType(.phonePad)
             Text(phoneNumber.wrappedValue.countryCode.flag)
                 ._presentSheet {
                     CountryCodePickerView(countryCode: phoneNumber.countryCode)
+                        .font(.body)
                 }
         }
         .padding(3)
