@@ -42,7 +42,6 @@ public class PhNumber {
         }
         do {
             let phoneNumber = try phoneNumberKit.parse(rawString)
-            rawString = phoneNumber.nationalNumber.description
             if let regionID = phoneNumber.regionID {
                 countryCode = .init(code: regionID)
             }
