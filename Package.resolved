@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jonahaung2/XUI",
       "state" : {
-        "revision" : "4c403a3e6ce3967636bc65a75a0f647389e20d33",
-        "version" : "2.0.0"
+        "revision" : "dce9543f239ca6a38958ea174a0cbc3118dcf54d",
+        "version" : "1.0.2"
       }
     }
   ],
