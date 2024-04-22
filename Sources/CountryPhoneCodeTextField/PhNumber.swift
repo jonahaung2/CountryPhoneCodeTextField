@@ -14,6 +14,9 @@ public class PhNumber {
     public var id: String { countryCode.country + rawString }
     public var countryCode: CountryCode
     public var rawString: String
+    public var plceHolder: String {
+        phoneNumberKit.getFormattedExampleNumber(forCountry: countryCode.country) ?? "Phone Number"
+    }
     private let phoneNumberKit = PhoneNumberKit()
     
     public var isValid: Bool {
@@ -39,7 +42,7 @@ public class PhNumber {
     
     public init(countryCode: CountryCode) {
         self.countryCode = countryCode
-        self.rawString = String()
+        self.rawString = ""
     }
     
     public func validate() {
