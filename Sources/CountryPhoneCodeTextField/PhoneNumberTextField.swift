@@ -23,7 +23,7 @@ public struct PhoneNumberTextField: View {
                 }
             Divider()
             
-            TextField(phoneNumber.countryCode.wrappedValue.name, text: phoneNumber.rawString)
+            TextField(phoneNumber.wrappedValue.plceHolder, text: phoneNumber.rawString)
                 .textContentType(.telephoneNumber)
                 .keyboardType(.phonePad)
             Text(phoneNumber.wrappedValue.countryCode.flag)
