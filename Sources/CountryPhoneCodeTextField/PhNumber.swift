@@ -31,7 +31,6 @@ public class PhNumber {
             do {
                 let phoneNumber = try phoneNumberKit.parse(countryCode.phoneCode + rawString)
                 return phoneNumberKit.format(phoneNumber, toType: .e164)
-                
             } catch {
                 return nil
             }

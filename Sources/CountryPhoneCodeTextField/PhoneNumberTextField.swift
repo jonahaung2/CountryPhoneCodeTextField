@@ -18,18 +18,17 @@ public struct PhoneNumberTextField: View {
     public var body: some View {
         HStack {
             Button {
+                phoneNumber.wrappedValue.rawString = ""
                 showCountryPicker = true
             } label: {
                 Text(phoneNumber.wrappedValue.countryCode.country)
             }
-
-            Text(phoneNumber.wrappedValue.countryCode.country)
             Divider()
-            
             TextField(phoneNumber.wrappedValue.plceHolder, text: phoneNumber.rawString)
                 .textContentType(.telephoneNumber)
                 .keyboardType(.phonePad)
             Button {
+                phoneNumber.wrappedValue.rawString = ""
                 showCountryPicker = true
             } label: {
                 Text(phoneNumber.wrappedValue.countryCode.flag)
