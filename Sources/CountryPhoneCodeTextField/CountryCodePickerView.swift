@@ -8,9 +8,9 @@
 import SwiftUI
 
 public struct CountryCodePickerView: View {
-
+    
     public var countryCode: Binding<CountryCode>
-
+    
     @State private var searchText = ""
     private var displayedCodes: [CountryCode] {
         if searchText.isEmpty {
@@ -20,7 +20,7 @@ public struct CountryCodePickerView: View {
         }
     }
     @Environment(\.dismiss) private var dismiss
-
+    
     public var body: some View {
         NavigationView {
             List {
@@ -36,14 +36,13 @@ public struct CountryCodePickerView: View {
                                     .foregroundColor(.primary)
                                 Spacer()
                                 Text(code.phoneCode)
-                                    .foregroundColor(.secondary)
+                                    .foregroundStyle(code == countryCode.wrappedValue ? Color.accentColor : .secondary)
                             }
                         }
                     }
                     .buttonStyle(.borderless)
                 }
             }
-            .font(.body)
             .navigationTitle("Country Picker")
             .searchable(text: $searchText, prompt: "Search country by name")
         }

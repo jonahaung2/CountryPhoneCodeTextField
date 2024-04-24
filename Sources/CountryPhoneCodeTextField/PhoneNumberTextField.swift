@@ -11,26 +11,34 @@ import XUI
 public struct PhoneNumberTextField: View {
     
     private var phoneNumber: Binding<PhNumber>
+    @State private var showCountryPicker = false
     
     public init(phoneNumber: Binding<PhNumber>) {
         self.phoneNumber = phoneNumber
     }
     public var body: some View {
         HStack {
+            Button {
+                showCountryPicker = true
+            } label: {
+                Text(phoneNumber.wrappedValue.countryCode.country)
+            }
+
             Text(phoneNumber.wrappedValue.countryCode.country)
-                ._presentSheet {
-                    CountryCodePickerView(countryCode: phoneNumber.countryCode)
-                }
             Divider()
             
             TextField(phoneNumber.wrappedValue.plceHolder, text: phoneNumber.rawString)
                 .textContentType(.telephoneNumber)
                 .keyboardType(.phonePad)
-            Text(phoneNumber.wrappedValue.countryCode.flag)
-                ._presentSheet {
-                    CountryCodePickerView(countryCode: phoneNumber.countryCode)
-                }
+            Button {
+                showCountryPicker = true
+            } label: {
+                Text(phoneNumber.wrappedValue.countryCode.flag)
+            }.buttonStyle(.plain)
         }
         .padding(3)
+        .sheet(isPresented: $showCountryPicker) {
+            CountryCodePickerView(countryCode: phoneNumber.countryCode)
+        }
     }
 }

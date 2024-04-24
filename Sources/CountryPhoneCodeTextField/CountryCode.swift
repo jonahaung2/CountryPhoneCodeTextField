@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CountryCode: Identifiable {
+public struct CountryCode: Equatable, Identifiable {
 
     public var id: String { country }
     public let country: String
